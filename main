@@ -1,0 +1,59 @@
+from abc import ABC
+
+
+class addressclas(ABC):
+
+    def __init__(self, address):
+        self.address = address
+
+    def calculateFreqs(self,address):
+        pass
+
+class ListCount(addressclas):
+    def __init__(self,address):
+        addressclas.__init__(self,address)
+
+    def calculateFreqs(self, address):
+        f = open(address)
+        str1 = f.readline()
+        str1 = str1.split()
+        str2 = []
+        for i in str1:
+            if i not in str2:
+                str2.append(i)
+        for i in range(0, len(str2)):
+            print(str2[i], ' = ', str1.count(str2[i]))
+
+class DictCount(addressclas):
+    def calculateFreqs(self,address):
+
+        text = open(address, "r")
+        d = dict()
+
+        for metin in text:
+
+            metin = metin.strip()
+            metin = metin.lower()
+            words = metin.split(" ")
+
+            for word in words:
+                if word in d:
+                    d[word] = d[word] + 1
+                else:
+                    d[word] = 1
+        for key in list(d.keys()):
+            print(key, ":", d[key])
+
+
+adres = "C:\\Users\\C605\\Desktop\\strange.txt"
+
+ListCount_object = ListCount(adres)
+DictCount_object = DictCount(adres)
+
+ListCount_object.calculateFreqs(adres)
+print("""
+------------------------------------------
+------------------------------------------
+------------------------------------------
+""")
+DictCount_object.calculateFreqs(adres)
